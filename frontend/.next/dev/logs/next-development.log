@@ -1,0 +1,4 @@
+{"timestamp":"00:00:10.028","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:05:33.913","source":"Server","level":"LOG","message":"✓ Compiled in 1446ms"}
+{"timestamp":"00:09:14.623","source":"Server","level":"LOG","message":"✓ Compiled in 70ms"}
+{"timestamp":"00:10:19.638","source":"Server","level":"LOG","message":"○ Compiling /poll ..."}

@@ -1,0 +1,252 @@
+/* [project]/frontend/styles/globals.css [client] (css) */
+:root {
+  --lightningcss-light: ;
+  --lightningcss-dark: initial;
+  color-scheme: dark;
+  --bg: #08111f;
+  --bg-elevated: #0a1729c7;
+  --card: #0b1c30e6;
+  --card-border: #9ab0ca24;
+  --text: #ecf4ff;
+  --muted: #9cb5d1;
+  --accent: #71f0c2;
+  --accent-strong: #2de0b3;
+  --danger: #ff7d8c;
+  --warning: #ffd280;
+  --shadow: 0 24px 70px #00000059;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #__next {
+  min-height: 100%;
+}
+
+body {
+  color: var(--text);
+  background: radial-gradient(circle at 0 0, #28669973, #0000 30%), radial-gradient(circle at 100% 0, #26bc9938, #0000 24%), linear-gradient(160deg, #030711 0%, #08111f 48%, #0d1c30 100%);
+  margin: 0;
+  font-family: Georgia, Times New Roman, serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 32px 20px 56px;
+}
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.hero {
+  border: 1px solid var(--card-border);
+  background: linear-gradient(135deg, #1b395ceb, #0a192cd1),
+    var(--card);
+  box-shadow: var(--shadow);
+  border-radius: 28px;
+  gap: 24px;
+  padding: 32px;
+  display: grid;
+}
+
+.hero__eyebrow {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  margin: 0;
+  font-size: .75rem;
+}
+
+.hero__title {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: .94;
+}
+
+.hero__subtitle {
+  max-width: 60ch;
+  color: var(--muted);
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.grid {
+  gap: 20px;
+  margin-top: 24px;
+  display: grid;
+}
+
+.grid--two {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card {
+  border: 1px solid var(--card-border);
+  background: var(--bg-elevated);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.card h2, .card h3, .card p {
+  margin-top: 0;
+}
+
+.status-row {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.pill {
+  color: var(--muted);
+  background: #ffffff0f;
+  border: 1px solid #ffffff14;
+  border-radius: 999px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: .92rem;
+  display: inline-flex;
+}
+
+.pill--success {
+  color: var(--accent);
+}
+
+.pill--danger {
+  color: var(--danger);
+}
+
+.btn {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #05231d;
+  cursor: pointer;
+  border: 0;
+  border-radius: 999px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 18px;
+  font-weight: 700;
+  transition: transform .16s, opacity .16s, box-shadow .16s;
+  display: inline-flex;
+  box-shadow: 0 12px 26px #2de0b338;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.btn--ghost {
+  color: var(--text);
+  box-shadow: none;
+  background: none;
+  border: 1px solid #ffffff24;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.stack {
+  gap: 16px;
+  display: grid;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+.message {
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+.message--error {
+  color: #ffc0c8;
+  background: #ff7d8c1a;
+  border: 1px solid #ff7d8c29;
+}
+
+.message--warning {
+  color: #ffe0a4;
+  background: #ffd2801f;
+  border: 1px solid #ffd2802e;
+}
+
+.option-list {
+  gap: 14px;
+  display: grid;
+}
+
+.option-card {
+  background: #ffffff08;
+  border: 1px solid #ffffff14;
+  border-radius: 20px;
+  gap: 12px;
+  padding: 18px;
+  display: grid;
+}
+
+.option-card__header {
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  display: flex;
+}
+
+.option-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.votes {
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.nav-link {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 18px 14px 40px;
+  }
+
+  .hero, .card {
+    border-radius: 22px;
+    padding: 20px;
+  }
+}
+
+/*# sourceMappingURL=frontend_styles_globals_01-fkbj.css.map*/

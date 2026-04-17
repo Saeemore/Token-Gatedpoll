@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 12, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Sai%20more/Documents/GitHub/Token-Gatedpoll/frontend/pages/_app.tsx"],"sourcesContent":["import { WagmiProvider, createConfig, http } from \"wagmi\";\r\nimport { sepolia } from \"wagmi/chains\";\r\n\r\nconst config = createConfig({\r\n  chains: [sepolia],\r\n  transports: {\r\n    [sepolia.id]: http(process.env.NEXT_PUBLIC_RPC_URL),\r\n  },\r\n});\r\n\r\nexport default function App({ Component, pageProps }: any) {\r\n  return (\r\n    <WagmiProvider config={config}>\r\n      <Component {...pageProps} />\r\n    </WagmiProvider>\r\n  );\r\n}"],"names":["config","chains","transports","id","process","env","NEXT_PUBLIC_RPC_URL","App","Component","pageProps"],"mappings":";;;;;AAAA;AACA;;;;;;;;;AAEA,MAAMA,SAAS,IAAA,kLAAY,EAAC;IAC1BC,QAAQ;QAAC,iMAAO;KAAC;IACjBC,YAAY;QACV,CAAC,iMAAO,CAACC,EAAE,CAAC,EAAE,IAAA,0KAAI,EAACC,QAAQC,GAAG,CAACC,mBAAmB;IACpD;AACF;AAEe,SAASC,IAAI,EAAEC,SAAS,EAAEC,SAAS,EAAO;IACvD,qBACE,qKAAC,mLAAa;QAACT,QAAQA;kBACrB,cAAA,qKAACQ;YAAW,GAAGC,SAAS;;;;;;;;;;;AAG9B"}}]
+}
