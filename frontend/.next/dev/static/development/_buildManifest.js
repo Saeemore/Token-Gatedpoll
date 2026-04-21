@@ -5,9 +5,6 @@ self.__BUILD_MANIFEST = {
   "/access": [
     "static/chunks/pages/access.js"
   ],
-  "/poll": [
-    "static/chunks/pages/poll.js"
-  ],
   "__rewrites": {
     "afterFiles": [],
     "beforeFiles": [],

@@ -1,5 +1,9 @@
-{"timestamp":"00:00:05.246","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:04:05.839","source":"Server","level":"LOG","message":"✓ Compiled in 281ms"}
-{"timestamp":"00:04:06.126","source":"Server","level":"LOG","message":"✓ Compiled in 316ms"}
-{"timestamp":"00:05:33.380","source":"Server","level":"LOG","message":"✓ Compiled in 191ms"}
-{"timestamp":"00:05:35.076","source":"Server","level":"LOG","message":"✓ Compiled in 309ms"}
+{"timestamp":"00:00:03.248","source":"Server","level":"LOG","message":"It looks like you're trying to use TypeScript but do not have the required package(s) installed.\nInstalling dependencies\n\nIf you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your app and pages directories).\n"}
+{"timestamp":"00:00:03.314","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:03.316","source":"Server","level":"LOG","message":"Installing devDependencies (npm):"}
+{"timestamp":"00:00:03.317","source":"Server","level":"LOG","message":"- @types/node"}
+{"timestamp":"00:00:03.321","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:08.511","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:09.456","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:06:50.606","source":"Server","level":"LOG","message":"○ Compiling / ..."}
+{"timestamp":"00:07:33.633","source":"Server","level":"LOG","message":"○ Compiling /access ..."}
