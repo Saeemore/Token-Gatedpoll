@@ -1,4 +1,5 @@
-{"timestamp":"00:00:10.028","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:05:33.913","source":"Server","level":"LOG","message":"✓ Compiled in 1446ms"}
-{"timestamp":"00:09:14.623","source":"Server","level":"LOG","message":"✓ Compiled in 70ms"}
-{"timestamp":"00:10:19.638","source":"Server","level":"LOG","message":"○ Compiling /poll ..."}
+{"timestamp":"00:00:05.246","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:04:05.839","source":"Server","level":"LOG","message":"✓ Compiled in 281ms"}
+{"timestamp":"00:04:06.126","source":"Server","level":"LOG","message":"✓ Compiled in 316ms"}
+{"timestamp":"00:05:33.380","source":"Server","level":"LOG","message":"✓ Compiled in 191ms"}
+{"timestamp":"00:05:35.076","source":"Server","level":"LOG","message":"✓ Compiled in 309ms"}

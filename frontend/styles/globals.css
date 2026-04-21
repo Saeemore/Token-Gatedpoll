@@ -64,6 +64,12 @@ button {
   box-shadow: var(--shadow);
 }
 
+.hero--landing {
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  align-items: stretch;
+  overflow: hidden;
+}
+
 .hero__eyebrow {
   margin: 0;
   color: var(--accent);
@@ -87,6 +93,181 @@ button {
   line-height: 1.7;
 }
 
+.landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric-card {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateY(0);
+  animation: drift 7s ease-in-out infinite;
+}
+
+.metric-card:nth-child(2) {
+  animation-delay: -1.2s;
+}
+
+.metric-card:nth-child(3) {
+  animation-delay: -2.4s;
+}
+
+.metric-card__label {
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-stage {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 460px;
+}
+
+.hero-orbit {
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(113, 240, 194, 0.14);
+  filter: blur(0.2px);
+}
+
+.hero-orbit--one {
+  inset: 16px 34px 46px 18px;
+  animation: spinSlow 20s linear infinite;
+}
+
+.hero-orbit--two {
+  inset: 56px 4px 10px 66px;
+  border-color: rgba(96, 176, 255, 0.16);
+  animation: spinSlowReverse 24s linear infinite;
+}
+
+.hero-panel {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top, rgba(113, 240, 194, 0.14), transparent 50%),
+    rgba(4, 13, 24, 0.56);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.hero-panel__title {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  line-height: 1.15;
+}
+
+.signal-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.signal-card {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.signal-card--active {
+  background: linear-gradient(135deg, rgba(113, 240, 194, 0.15), rgba(55, 117, 191, 0.12));
+  box-shadow: 0 12px 24px rgba(23, 74, 118, 0.24);
+}
+
+.signal-card__label {
+  color: var(--accent);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.floating-card {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  gap: 10px;
+  width: min(270px, 78%);
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(6, 18, 33, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.floating-card--top {
+  top: 24px;
+  right: 12px;
+  animation: floatCard 7.5s ease-in-out infinite;
+}
+
+.floating-card--bottom {
+  bottom: 18px;
+  left: 16px;
+  animation: floatCard 8.5s ease-in-out infinite reverse;
+}
+
+.floating-card__eyebrow {
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.vote-preview {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 12px;
+  align-items: center;
+}
+
+.vote-preview__option {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.vote-preview__bar {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(113, 240, 194, 0.34), rgba(45, 224, 179, 0.88));
+  transform-origin: left center;
+  animation: pulseBar 4.5s ease-in-out infinite;
+}
+
+.vote-preview__bar--one {
+  width: 84%;
+}
+
+.vote-preview__bar--two {
+  width: 63%;
+  animation-delay: -0.6s;
+}
+
+.vote-preview__bar--three {
+  width: 48%;
+  animation-delay: -1.2s;
+}
+
 .grid {
   display: grid;
   gap: 20px;
@@ -104,6 +285,10 @@ button {
   background: var(--bg-elevated);
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
+}
+
+.landing-card {
+  min-height: 100%;
 }
 
 .card h2,
@@ -187,6 +372,47 @@ button {
   line-height: 1.6;
 }
 
+.feature-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.landing-feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.feature-card {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    rgba(9, 21, 37, 0.8);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.feature-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -40% 30%;
+  height: 120px;
+  background: radial-gradient(circle, rgba(113, 240, 194, 0.16), transparent 62%);
+  pointer-events: none;
+}
+
+.feature-card__index {
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 .message {
   padding: 14px 16px;
   border-radius: 18px;
@@ -242,6 +468,56 @@ button {
   font-weight: 700;
 }
 
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes floatCard {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+
+@keyframes pulseBar {
+  0%,
+  100% {
+    transform: scaleX(0.96);
+    opacity: 0.86;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinSlowReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
 @media (max-width: 640px) {
   .app-shell {
     padding: 18px 14px 40px;
@@ -251,5 +527,47 @@ button {
   .card {
     padding: 20px;
     border-radius: 22px;
+  }
+
+  .hero-metrics,
+  .landing-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .hero-stage {
+    min-height: auto;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero--landing {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-metrics,
+  .landing-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stage {
+    min-height: auto;
+    gap: 16px;
+  }
+
+  .hero-orbit {
+    display: none;
+  }
+
+  .floating-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
   }
 }

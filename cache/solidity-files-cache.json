@@ -650,8 +650,8 @@
       ]
     },
     "C:\\Users\\Sai more\\Documents\\GitHub\\Token-Gatedpoll\\contracts\\Poll.sol": {
-      "lastModificationDate": 1776102593183,
-      "contentHash": "4edc6ba97b3516abc72790e809e27115",
+      "lastModificationDate": 1776519038284,
+      "contentHash": "82f912c7e6fa687dfb3b0cdfa81c8d7c",
       "sourceName": "contracts/Poll.sol",
       "solcConfig": {
         "version": "0.8.29",

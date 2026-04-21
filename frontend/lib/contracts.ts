@@ -68,4 +68,11 @@ export const pollAbi: Abi = [
     inputs: [{ name: "", type: "address" }],
     outputs: [{ name: "", type: "bool" }],
   },
+  {
+    type: "function",
+    name: "votedOption",
+    stateMutability: "view",
+    inputs: [{ name: "", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+  },
 ];

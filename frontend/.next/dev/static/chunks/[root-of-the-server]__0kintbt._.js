@@ -480,7 +480,7 @@ const deployment = {
     "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "membershipAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     "pollAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-    "deployedAt": "2026-04-17T06:30:55.002Z"
+    "deployedAt": "2026-04-18T13:50:17.964Z"
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -618,6 +618,23 @@ const pollAbi = [
                 type: "bool"
             }
         ]
+    },
+    {
+        type: "function",
+        name: "votedOption",
+        stateMutability: "view",
+        inputs: [
+            {
+                name: "",
+                type: "address"
+            }
+        ],
+        outputs: [
+            {
+                name: "",
+                type: "uint256"
+            }
+        ]
     }
 ];
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -637,6 +654,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useChainId$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/wagmi/dist/esm/hooks/useChainId.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/wagmi/dist/esm/hooks/useReadContract.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContracts$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/wagmi/dist/esm/hooks/useReadContracts.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useWaitForTransactionReceipt$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/wagmi/dist/esm/hooks/useWaitForTransactionReceipt.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useWriteContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/wagmi/dist/esm/hooks/useWriteContract.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$hardhat$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/viem/_esm/chains/definitions/hardhat.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/lib/contracts.ts [client] (ecmascript)");
@@ -651,9 +669,9 @@ function Poll() {
     _s();
     const { address } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useConnection$2e$js__$5b$client$5d$__$28$ecmascript$29$__$3c$export__useConnection__as__useAccount$3e$__["useAccount"])();
     const chainId = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useChainId$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useChainId"])();
-    const { writeContract, isPending, error } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useWriteContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useWriteContract"])();
+    const { writeContract, data: voteHash, isPending, error } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useWriteContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useWriteContract"])();
     const isWrongChain = !!address && chainId !== __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$hardhat$2e$js__$5b$client$5d$__$28$ecmascript$29$__["hardhat"].id;
-    const { data: balance, error: balanceError } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"])({
+    const { data: balance, error: balanceError, refetch: refetchBalance } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"])({
         address: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["membershipAddress"],
         abi: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["membershipAbi"],
         functionName: "balanceOf",
@@ -663,48 +681,6 @@ function Poll() {
         chainId: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$hardhat$2e$js__$5b$client$5d$__$28$ecmascript$29$__["hardhat"].id
     });
     const isMember = typeof balance === "bigint" && balance > 0n;
-    if (!isMember) {
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-            className: "page",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "card stack",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        children: "Access Denied"
-                    }, void 0, false, {
-                        fileName: "[project]/frontend/pages/poll.tsx",
-                        lineNumber: 40,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "meta",
-                        children: balanceError ? `The local membership contract could not be reached on ${__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["localRpcUrl"]}.` : "You need a membership NFT before you can participate in polls."
-                    }, void 0, false, {
-                        fileName: "[project]/frontend/pages/poll.tsx",
-                        lineNumber: 41,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
-                        className: "nav-link",
-                        href: "/",
-                        children: "Return to membership page"
-                    }, void 0, false, {
-                        fileName: "[project]/frontend/pages/poll.tsx",
-                        lineNumber: 46,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/frontend/pages/poll.tsx",
-                lineNumber: 39,
-                columnNumber: 9
-            }, this)
-        }, void 0, false, {
-            fileName: "[project]/frontend/pages/poll.tsx",
-            lineNumber: 38,
-            columnNumber: 7
-        }, this);
-    }
     const { data: question } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"])({
         address: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["pollAddress"],
         abi: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["pollAbi"],
@@ -727,10 +703,10 @@ function Poll() {
             ],
             chainId: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$hardhat$2e$js__$5b$client$5d$__$28$ecmascript$29$__["hardhat"].id
         }));
-    const { data: votesData } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContracts$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContracts"])({
+    const { data: votesData, refetch: refetchVoteCounts } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContracts$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContracts"])({
         contracts: votesContracts
     });
-    const { data: hasVoted } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"])({
+    const { data: hasVoted, refetch: refetchHasVoted } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"])({
         address: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["pollAddress"],
         abi: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["pollAbi"],
         functionName: "hasVoted",
@@ -738,6 +714,29 @@ function Poll() {
             address ?? zeroAddress
         ],
         chainId: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$hardhat$2e$js__$5b$client$5d$__$28$ecmascript$29$__["hardhat"].id
+    });
+    const { data: votedOptionIndex, refetch: refetchVotedOption } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"])({
+        address: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["pollAddress"],
+        abi: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["pollAbi"],
+        functionName: "votedOption",
+        args: [
+            address ?? zeroAddress
+        ],
+        chainId: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$hardhat$2e$js__$5b$client$5d$__$28$ecmascript$29$__["hardhat"].id
+    });
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useWaitForTransactionReceipt$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useWaitForTransactionReceipt"])({
+        hash: voteHash,
+        query: {
+            enabled: !!voteHash
+        },
+        onSuccess: {
+            "Poll.useWaitForTransactionReceipt": ()=>{
+                void refetchBalance();
+                void refetchHasVoted();
+                void refetchVotedOption();
+                void refetchVoteCounts();
+            }
+        }["Poll.useWaitForTransactionReceipt"]
     });
     const handleVote = (index)=>{
         if (!address || isWrongChain) return;
@@ -753,6 +752,49 @@ function Poll() {
             account: address
         });
     };
+    const selectedOptionLabel = hasVoted && typeof votedOptionIndex === "bigint" ? safeOptions[Number(votedOptionIndex)] : undefined;
+    if (!isMember) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+            className: "page",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                className: "card stack",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                        children: "Access Denied"
+                    }, void 0, false, {
+                        fileName: "[project]/frontend/pages/poll.tsx",
+                        lineNumber: 126,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "meta",
+                        children: balanceError ? `The local membership contract could not be reached on ${__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$lib$2f$contracts$2e$ts__$5b$client$5d$__$28$ecmascript$29$__["localRpcUrl"]}.` : "You need a membership NFT before you can participate in polls."
+                    }, void 0, false, {
+                        fileName: "[project]/frontend/pages/poll.tsx",
+                        lineNumber: 127,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
+                        className: "nav-link",
+                        href: "/access",
+                        children: "Return to membership page"
+                    }, void 0, false, {
+                        fileName: "[project]/frontend/pages/poll.tsx",
+                        lineNumber: 132,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/frontend/pages/poll.tsx",
+                lineNumber: 125,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/frontend/pages/poll.tsx",
+            lineNumber: 124,
+            columnNumber: 7
+        }, this);
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
         className: "page",
         children: [
@@ -766,7 +808,7 @@ function Poll() {
                             children: "Members only ballot"
                         }, void 0, false, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 108,
+                            lineNumber: 144,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -774,7 +816,7 @@ function Poll() {
                             children: typeof question === "string" ? question : "Loading poll..."
                         }, void 0, false, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 109,
+                            lineNumber: 145,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -782,18 +824,18 @@ function Poll() {
                             children: "Each connected member wallet gets one vote. Results update from the smart contract state on your local chain."
                         }, void 0, false, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 112,
+                            lineNumber: 148,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/frontend/pages/poll.tsx",
-                    lineNumber: 107,
+                    lineNumber: 143,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/frontend/pages/poll.tsx",
-                lineNumber: 106,
+                lineNumber: 142,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -809,7 +851,7 @@ function Poll() {
                                     children: "Membership verified"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/pages/poll.tsx",
-                                    lineNumber: 122,
+                                    lineNumber: 158,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -817,13 +859,44 @@ function Poll() {
                                     children: hasVoted ? "Vote recorded" : "Vote not submitted yet"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/pages/poll.tsx",
-                                    lineNumber: 123,
+                                    lineNumber: 159,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 121,
+                            lineNumber: 157,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "stack",
+                            children: [
+                                address && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "meta",
+                                    children: [
+                                        "Verified member wallet: ",
+                                        address
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/frontend/pages/poll.tsx",
+                                    lineNumber: 165,
+                                    columnNumber: 25
+                                }, this),
+                                hasVoted && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "meta",
+                                    children: [
+                                        "Recorded vote: ",
+                                        selectedOptionLabel ? String(selectedOptionLabel) : "Loading option..."
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/frontend/pages/poll.tsx",
+                                    lineNumber: 167,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/frontend/pages/poll.tsx",
+                            lineNumber: 164,
                             columnNumber: 11
                         }, this),
                         isWrongChain && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -831,7 +904,7 @@ function Poll() {
                             children: "Switch your wallet to Hardhat localhost before voting."
                         }, void 0, false, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 129,
+                            lineNumber: 174,
                             columnNumber: 13
                         }, this),
                         error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -839,7 +912,7 @@ function Poll() {
                             children: error.message
                         }, void 0, false, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 134,
+                            lineNumber: 179,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -855,7 +928,7 @@ function Poll() {
                                                     children: String(option)
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/pages/poll.tsx",
-                                                    lineNumber: 140,
+                                                    lineNumber: 185,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -863,13 +936,13 @@ function Poll() {
                                                     children: typeof votesData?.[index]?.result === "bigint" ? `${votesData[index].result.toString()} votes` : "0 votes"
                                                 }, void 0, false, {
                                                     fileName: "[project]/frontend/pages/poll.tsx",
-                                                    lineNumber: 141,
+                                                    lineNumber: 186,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/frontend/pages/poll.tsx",
-                                            lineNumber: 139,
+                                            lineNumber: 184,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -879,48 +952,48 @@ function Poll() {
                                             children: isPending ? "Submitting vote..." : `Vote for ${String(option)}`
                                         }, void 0, false, {
                                             fileName: "[project]/frontend/pages/poll.tsx",
-                                            lineNumber: 147,
+                                            lineNumber: 192,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, index, true, {
                                     fileName: "[project]/frontend/pages/poll.tsx",
-                                    lineNumber: 138,
+                                    lineNumber: 183,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 136,
+                            lineNumber: 181,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                             className: "nav-link",
-                            href: "/",
+                            href: "/access",
                             children: "Back to membership page"
                         }, void 0, false, {
                             fileName: "[project]/frontend/pages/poll.tsx",
-                            lineNumber: 158,
+                            lineNumber: 203,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/frontend/pages/poll.tsx",
-                    lineNumber: 120,
+                    lineNumber: 156,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/frontend/pages/poll.tsx",
-                lineNumber: 119,
+                lineNumber: 155,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/frontend/pages/poll.tsx",
-        lineNumber: 105,
+        lineNumber: 141,
         columnNumber: 5
     }, this);
 }
-_s(Poll, "3DJlRTivTCWaPyc+2oHhntHASvQ=", false, function() {
+_s(Poll, "FNo6u0is4miZQ1OYLAP11YksVFc=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useConnection$2e$js__$5b$client$5d$__$28$ecmascript$29$__$3c$export__useConnection__as__useAccount$3e$__["useAccount"],
         __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useChainId$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useChainId"],
@@ -929,7 +1002,9 @@ _s(Poll, "3DJlRTivTCWaPyc+2oHhntHASvQ=", false, function() {
         __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"],
         __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"],
         __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContracts$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContracts"],
-        __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"]
+        __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useReadContract$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useReadContract"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$wagmi$2f$dist$2f$esm$2f$hooks$2f$useWaitForTransactionReceipt$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useWaitForTransactionReceipt"]
     ];
 });
 _c = Poll;

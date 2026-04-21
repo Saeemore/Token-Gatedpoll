@@ -4,6 +4,7 @@ import {
   useChainId,
   useReadContract,
   useReadContracts,
+  useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
 import { hardhat } from "wagmi/chains";
@@ -20,10 +21,19 @@ const zeroAddress = "0x0000000000000000000000000000000000000000" as const;
 export default function Poll() {
   const { address } = useAccount();
   const chainId = useChainId();
-  const { writeContract, isPending, error } = useWriteContract();
+  const {
+    writeContract,
+    data: voteHash,
+    isPending,
+    error,
+  } = useWriteContract();
   const isWrongChain = !!address && chainId !== hardhat.id;
 
-  const { data: balance, error: balanceError } = useReadContract({
+  const {
+    data: balance,
+    error: balanceError,
+    refetch: refetchBalance,
+  } = useReadContract({
     address: membershipAddress as `0x${string}`,
     abi: membershipAbi,
     functionName: "balanceOf",
@@ -32,24 +42,6 @@ export default function Poll() {
   });
 
   const isMember = typeof balance === "bigint" && balance > 0n;
-
-  if (!isMember) {
-    return (
-      <main className="page">
-        <section className="card stack">
-          <h1>Access Denied</h1>
-          <p className="meta">
-            {balanceError
-              ? `The local membership contract could not be reached on ${localRpcUrl}.`
-              : "You need a membership NFT before you can participate in polls."}
-          </p>
-          <Link className="nav-link" href="/">
-            Return to membership page
-          </Link>
-        </section>
-      </main>
-    );
-  }
 
   const { data: question } = useReadContract({
     address: pollAddress as `0x${string}`,
@@ -75,16 +67,37 @@ export default function Poll() {
     chainId: hardhat.id,
   }));
 
-  const { data: votesData } = useReadContracts({
+  const { data: votesData, refetch: refetchVoteCounts } = useReadContracts({
     contracts: votesContracts,
   });
 
-  const { data: hasVoted } = useReadContract({
+  const { data: hasVoted, refetch: refetchHasVoted } = useReadContract({
     address: pollAddress as `0x${string}`,
     abi: pollAbi,
     functionName: "hasVoted",
     args: [address ?? zeroAddress],
     chainId: hardhat.id,
+  });
+
+  const { data: votedOptionIndex, refetch: refetchVotedOption } = useReadContract({
+    address: pollAddress as `0x${string}`,
+    abi: pollAbi,
+    functionName: "votedOption",
+    args: [address ?? zeroAddress],
+    chainId: hardhat.id,
+  });
+
+  useWaitForTransactionReceipt({
+    hash: voteHash,
+    query: {
+      enabled: !!voteHash,
+    },
+    onSuccess: () => {
+      void refetchBalance();
+      void refetchHasVoted();
+      void refetchVotedOption();
+      void refetchVoteCounts();
+    },
   });
 
   const handleVote = (index: number) => {
@@ -100,6 +113,29 @@ export default function Poll() {
       account: address,
     });
   };
+
+  const selectedOptionLabel =
+    hasVoted && typeof votedOptionIndex === "bigint"
+      ? safeOptions[Number(votedOptionIndex)]
+      : undefined;
+
+  if (!isMember) {
+    return (
+      <main className="page">
+        <section className="card stack">
+          <h1>Access Denied</h1>
+          <p className="meta">
+            {balanceError
+              ? `The local membership contract could not be reached on ${localRpcUrl}.`
+              : "You need a membership NFT before you can participate in polls."}
+          </p>
+          <Link className="nav-link" href="/access">
+            Return to membership page
+          </Link>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="page">
@@ -123,6 +159,15 @@ export default function Poll() {
             <span className={`pill ${hasVoted ? "pill--success" : ""}`}>
               {hasVoted ? "Vote recorded" : "Vote not submitted yet"}
             </span>
+          </div>
+
+          <div className="stack">
+            {address && <p className="meta">Verified member wallet: {address}</p>}
+            {hasVoted && (
+              <p className="meta">
+                Recorded vote: {selectedOptionLabel ? String(selectedOptionLabel) : "Loading option..."}
+              </p>
+            )}
           </div>
 
           {isWrongChain && (
@@ -155,7 +200,7 @@ export default function Poll() {
             ))}
           </div>
 
-          <Link className="nav-link" href="/">
+          <Link className="nav-link" href="/access">
             Back to membership page
           </Link>
         </article>

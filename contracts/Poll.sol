@@ -10,6 +10,7 @@ contract Poll {
     string public question;
     string[] public options;
     mapping(address => bool) public hasVoted;
+    mapping(address => uint256) public votedOption;
     mapping(uint256 => uint256) public votes;
 
     constructor(address membershipNFTAddress, string memory _question, string[] memory _options) {
@@ -24,6 +25,7 @@ contract Poll {
         require(optionIndex < options.length, "Invalid option");
 
         hasVoted[msg.sender] = true;
+        votedOption[msg.sender] = optionIndex;
         votes[optionIndex]++;
     }
 

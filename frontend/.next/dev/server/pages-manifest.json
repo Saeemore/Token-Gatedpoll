@@ -2,5 +2,6 @@
   "/": "pages/index.js",
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
+  "/access": "pages/access.js",
   "/poll": "pages/poll.js"
 }
