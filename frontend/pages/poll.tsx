@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import {
   useAccount,
   useChainId,
@@ -87,18 +88,27 @@ export default function Poll() {
     chainId: hardhat.id,
   });
 
-  useWaitForTransactionReceipt({
+  const { isSuccess: isVoteConfirmed } = useWaitForTransactionReceipt({
     hash: voteHash,
     query: {
       enabled: !!voteHash,
     },
-    onSuccess: () => {
-      void refetchBalance();
-      void refetchHasVoted();
-      void refetchVotedOption();
-      void refetchVoteCounts();
-    },
   });
+
+  useEffect(() => {
+    if (!isVoteConfirmed) return;
+
+    void refetchBalance();
+    void refetchHasVoted();
+    void refetchVotedOption();
+    void refetchVoteCounts();
+  }, [
+    isVoteConfirmed,
+    refetchBalance,
+    refetchHasVoted,
+    refetchVotedOption,
+    refetchVoteCounts,
+  ]);
 
   const handleVote = (index: number) => {
     if (!address || isWrongChain) return;
